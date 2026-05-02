@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Catedral - Materiais</title>
+
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: #e2e8f0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.stats {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 20px;
+  background: #1e293b;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #4ade80);
+  width: 0%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+}
+
+th {
+  background: #1e293b;
+}
+
+tr:hover {
+  background: #1e293b;
+}
+
+.completed {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.packs {
+  color: #22c55e;
+}
+
+.small {
+  font-size: 12px;
+  color: #94a3b8;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⛪ Catedral - Materiais</h1>
+
+<div class="stats" id="stats"></div>
+
+<div class="progress-bar">
+  <div class="progress" id="progress"></div>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>✔</th>
+<th>Item</th>
+<th>Total</th>
+<th>Necessário</th>
+</tr>
+</thead>
+<tbody id="tabela"></tbody>
+</table>
+
+<script>
+
+// 🔥 COLE SEU JSON AQUI
+const fixes = {
+  "iron_chain": "chain",
+  "oak_log": "oak_log",
+  "spruce_log": "spruce_log",
+  "stripped_spruce_log": "stripped_spruce_log",
+  "sweet_berries": "sweet_berries",
+  "lantern": "lantern",
+  "glowstone": "glowstone",
+  "candle": "candle",
+  "end_rod": "end_rod",
+  "grindstone": "grindstone",
+  "flower_pot": "flower_pot",
+  "decorated_pot": "decorated_pot",
+  "lectern": "lectern"
+};
+const data = {
+  "Name": "Catedral",
+  "Title": "Material List for placement \u0027Catedral\u0027",
+  "Multiplier": 1,
+  "Date": "Sat, 2 May 2026 16:12:40 -0300",
+  "Materials": [
+    {
+      "Item": "minecraft:deepslate_bricks",
+      "Total": 6327,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:red_nether_bricks",
+      "Total": 2417,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_tiles",
+      "Total": 2354,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_planks",
+      "Total": 1744,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate",
+      "Total": 1174,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_tile_wall",
+      "Total": 776,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_brick_wall",
+      "Total": 408,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_fence",
+      "Total": 379,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:red_stained_glass_pane",
+      "Total": 368,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:oak_log",
+      "Total": 299,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_brick_slab",
+      "Total": 290,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:candle",
+      "Total": 268,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:iron_chain",
+      "Total": 263,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_stairs",
+      "Total": 256,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:chiseled_deepslate",
+      "Total": 245,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_brick_stairs",
+      "Total": 239,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:red_carpet",
+      "Total": 225,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:white_carpet",
+      "Total": 213,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:red_stained_glass",
+      "Total": 208,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:polished_andesite",
+      "Total": 180,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:polished_granite",
+      "Total": 180,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_trapdoor",
+      "Total": 154,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_tile_stairs",
+      "Total": 140,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_trapdoor",
+      "Total": 126,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_log",
+      "Total": 108,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:smooth_stone",
+      "Total": 100,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:lantern",
+      "Total": 99,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:glowstone",
+      "Total": 99,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_fence",
+      "Total": 76,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:stripped_spruce_log",
+      "Total": 73,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:ladder",
+      "Total": 70,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:ochre_froglight",
+      "Total": 64,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_slab",
+      "Total": 64,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_fence_gate",
+      "Total": 64,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:sweet_berries",
+      "Total": 54,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:rooted_dirt",
+      "Total": 54,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:chiseled_stone_bricks",
+      "Total": 54,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:red_nether_brick_wall",
+      "Total": 50,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:nether_brick_fence",
+      "Total": 46,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:deepslate_tile_slab",
+      "Total": 44,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:purple_stained_glass_pane",
+      "Total": 33,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:red_nether_brick_stairs",
+      "Total": 32,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_slab",
+      "Total": 21,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:purple_stained_glass",
+      "Total": 21,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:crimson_trapdoor",
+      "Total": 18,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_stairs",
+      "Total": 18,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:mangrove_fence",
+      "Total": 14,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:oak_leaves",
+      "Total": 8,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_fence_gate",
+      "Total": 8,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:end_rod",
+      "Total": 8,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:grindstone",
+      "Total": 6,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dead_bush",
+      "Total": 4,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:flower_pot",
+      "Total": 4,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:decorated_pot",
+      "Total": 4,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_planks",
+      "Total": 3,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:iron_bars",
+      "Total": 2,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:cobbled_deepslate_stairs",
+      "Total": 2,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:spruce_door",
+      "Total": 2,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:lectern",
+      "Total": 1,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    },
+    {
+      "Item": "minecraft:dark_oak_door",
+      "Total": 1,
+      "Missing": 0,
+      "Mismatched": 0,
+      "Available": 0
+    }
+  ]
+};
+
+// Nome bonito
+function formatName(id) {
+  return id.replace("minecraft:", "")
+    .split("_")
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+// URL da textura
+function getTexture(id) {
+  const name = id.replace("minecraft:", "");
+  return {
+    item: `https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/item/${name}.png`,
+    block: `https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/block/${name}.png`
+  };
+}
+
+// Packs
+function calc(total) {
+  const packs = Math.floor(total / 64);
+  const sobra = total % 64;
+  return `${packs} packs + ${sobra}`;
+}
+
+// Ordenar
+data.Materials.sort((a, b) => b.Total - a.Total);
+
+const tabela = document.getElementById("tabela");
+const stats = document.getElementById("stats");
+const progressBar = document.getElementById("progress");
+
+function render() {
+  tabela.innerHTML = "";
+
+  let feitos = 0;
+
+  data.Materials.forEach((item, i) => {
+    const salvo = localStorage.getItem("item_" + i) === "true";
+    if (salvo) feitos++;
+
+    const tr = document.createElement("tr");
+    if (salvo) tr.classList.add("completed");
+
+    const texture = getTexture(item.Item);
+
+    tr.innerHTML = `
+      <td><input type="checkbox" ${salvo ? "checked" : ""}></td>
+
+      <td>
+        <div class="item">
+        <img 
+            src="${texture.item}" 
+            data-block="${texture.block}"
+             onerror="if(!this.dataset.tentou){ this.src=this.dataset.block; this.dataset.tentou=true } else { this.src='https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/item/barrier.png' }"
+                >
+<span>${formatName(item.Item)}</span>
+        </div>
+      </td>
+
+      <td>${item.Total}</td>
+
+      <td class="packs">
+        ${calc(item.Total)}
+        <div class="small">(${Math.ceil(item.Total/64)} stacks)</div>
+      </td>
+    `;
+
+    tr.querySelector("input").addEventListener("change", () => {
+      localStorage.setItem("item_" + i, !salvo);
+      render();
+    });
+
+    tabela.appendChild(tr);
+  });
+
+  const percent = Math.round((feitos / data.Materials.length) * 100);
+
+  stats.innerHTML = `Progresso: ${feitos}/${data.Materials.length} (${percent}%)`;
+  progressBar.style.width = percent + "%";
+}
+
+render();
+
+</script>
+
+</body>
+</html>
